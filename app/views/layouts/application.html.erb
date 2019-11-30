@@ -16,6 +16,65 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <div>
+        <a href="/">
+          <i class="fab fa-firstdraft fa-fw"></i>
+
+          Medications
+        </a>
+      </div>
+
+      <div>
+        <a href="/appointments">
+          <i class="fas fa-users"></i>
+
+          Appointments 
+        </a>
+      </div>
+
+        <div>
+        <a href="/doctors">
+          <i class="fas fa-users"></i>
+
+          All Available Doctors 
+          
+        </a>
+      </div>
+      <% if @current_user == nil%>
+        <div>
+          <a href="/user_sign_up">
+            <i class="fas fa-users"></i>
+
+            Sign Up
+          </a>
+        </div>
+
+        <div>
+          <a href="/user_sign_in">
+            <i class="fas fa-users"></i>
+
+            Sign In 
+          </a>
+        </div>
+
+      <%else %>
+
+            <div>
+          <a href="/user_sign_out">
+            <i class="fas fa-users"></i>
+
+            Sign Out
+          </a>
+        </div>
+
+            <div>
+           <b> Currently signed into: </b> <%= @current_user.email%> 
+
+        </div>
+
+      <%end %>
+    </nav>
+        <%= yield %>
   </body>
 </html>

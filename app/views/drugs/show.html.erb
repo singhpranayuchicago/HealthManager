@@ -1,0 +1,132 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      <%= @drug.description %> Details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/drugs" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+    <div class="col">
+        <a href="/delete_drug/<%= @drug.id %>" class="btn btn-block btn-outline-secondary">
+          Delete drug
+        </a>
+      </div>
+    </div>
+
+    <dl>
+
+      <dt>
+        Patient
+      </dt>
+      <dd>
+        <%= @drug.drug_users%>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @drug.description %>
+      </dd>
+
+      <dt>
+        Take at
+      </dt>
+      <dd>
+        <%= @drug.take_at.strftime("%B %d, %Y at %l:%M %p") %>
+      </dd>
+
+      <dt>
+        Amount
+      </dt>
+      <dd>
+        <%= @drug.amount %>
+      </dd>
+
+      <dt>
+        Latest Rating <i> (Five Point Scale) </i>
+      </dt>
+      <dd>
+        <%= @drug.rating %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@drug.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@drug.updated_at) %> ago
+      </dd>
+    </dl>
+
+
+<hr>
+
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Edit drug
+    </h2>
+
+    <form action="/modify_drug/<%= @drug.id %>"  method="post" >
+
+
+      <div class="form-group">
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="description_from_query" class="form-control" value="<%= @drug.description %>">
+      </div>
+
+      <div class="form-group">
+        <label for="take_at_box">
+          Take at
+        </label>
+
+        <input type="datetime-local" id="take_at_box" name="take_at_from_query"
+          class="form-control" value="<%= @drug.take_at %>">
+      </div>
+
+      <div class="form-group">
+        <label for="amount_box">
+          Amount
+        </label>
+
+        <input type="text" id="amount_box" name="amount_to_take_query" class="form-control" value="<%= @drug.amount %>">
+      
+
+        <div class="form-group">
+            <label for="rating_box"> Rating </label>
+            <select class="form-control" id="rating_box" name="rating_from_query" value = "<%=@drug.rating%>" >
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+            </select>
+          </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Update drug
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<hr>

@@ -1,0 +1,122 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="jrow mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1> Appointment List </h1>
+</div>
+</div>
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Add a new appointment 
+    </h2>
+
+    <form action="/insert_appointment" method="post">
+      <div class="form-group">
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="description_from_query" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="time_at_box">
+          Time at
+        </label>
+
+        <input type="datetime-local" id="time_at_box" name="time_at_from_query" class="form-control">
+      </div>
+
+
+      <div class="form-group">
+        <label for="doctor_id_box">
+          Doctor <i> (must be listed under All Available Doctors)</i>
+        </label>
+        <input type="text" id="doctor_id_box" name="doctor_id_from_query" class="form-control">
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Create appointment
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Time at
+        </th>
+
+        <th>
+          Patient 
+        </th>
+
+        <th>
+          Doctor
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @appointments.each do |appointment| %>
+      <tr>
+        <% if @current_user.id == appointment.user_id %> 
+        <td>
+          <%= appointment.description %>
+        </td>
+
+        <td>
+          <%= appointment.time_at.strftime("%B %d, %Y at %l:%M %p") %>
+        </td>
+
+        <td>
+          <%= appointment.patients %> 
+        </td>
+
+        <td>
+          <%= appointment.doctor_names %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(appointment.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(appointment.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/appointments/<%= appointment.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,97 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      <%= @appointment.description %> Details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/appointments" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_appointment/<%= @appointment.id %>" class="btn btn-block btn-outline-secondary">
+          Delete appointment
+        </a>
+      </div>
+    </div>
+
+    <dl>
+
+      <dt>
+        Time at
+      </dt>
+      <dd>
+        <%= @appointment.time_at.strftime("%B %d, %Y at %l:%M %p") %>
+      </dd>
+
+      <dt>
+        Doctor
+      </dt>
+      <dd>
+        <%= @appointment.doctor_names %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@appointment.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@appointment.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Edit appointment
+    </h2>
+
+    <form action="/modify_appointment/<%= @appointment.id %>"  method="post" >
+      <div class="form-group">
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="description_from_query" class="form-control" value="<%= @appointment.description %>">
+      </div>
+
+      <div class="form-group">
+        <label for="time_at_box">
+          Time at
+        </label>
+
+        <input type="datetime-local" id="time_at_box" name="time_at_from_query" class="form-control"  value="<%= @appointment.time_at%>">
+      </div>
+
+      <div class="form-group">
+        <label for="doctor_id_box">
+          Doctor
+        </label>
+
+        <input type="text" id="doctor_id_box" name="doctor_id_from_query" class="form-control" value="<%= @appointment.doctor_names %>">
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Update appointment
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
